@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instruction Set Simulator</title>
+  <meta name="description" content="A powerful web application to convert arithmetic expressions into Postfix, 3-Address, 2-Address, 1-Address, and 0-Address instruction formats.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Navbar / Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="15" x2="23" y2="15"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="15" x2="4" y2="15"></line>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">Instruction Set Simulator</span>
+            <span class="brand-tag">v1.0 UI Preview</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-button" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      <div class="container">
+        
+        <!-- Hero & Description Section -->
+        <section class="hero-section">
+          <h1 class="hero-title">Instruction Set Simulator</h1>
+          <p class="hero-description">
+            This simulator converts standard arithmetic expressions into multiple computer architecture instruction formats, including <strong>Postfix</strong>, <strong>Three-Address</strong>, <strong>Two-Address</strong>, <strong>One-Address (Accumulator)</strong>, and <strong>Zero-Address (Stack Machine)</strong> representations.
+          </p>
+        </section>
+
+        <!-- Expression Input Card -->
+        <section class="card input-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+              <h2>Arithmetic Expression Input</h2>
+            </div>
+            <span class="badge">Supports A-Z Operands & +, -, *, /, ( )</span>
+          </div>
+
+          <div class="card-body">
+            <!-- Large Input Field -->
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="expression-input" 
+                class="expression-field" 
+                placeholder="(A+B)*(C-D)/E" 
+                value="(A+B)*(C-D)/E"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button id="clear-btn" class="clear-button" title="Clear input" aria-label="Clear input">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Preset / Example Expression Chips -->
+            <div class="examples-container">
+              <span class="examples-label">Try Example:</span>
+              <div class="chips-group">
+                <button class="chip" data-expr="(A+B)*(C-D)/E">(A+B)*(C-D)/E</button>
+                <button class="chip" data-expr="A+B*C-D">A+B*C-D</button>
+                <button class="chip" data-expr="(A+B)/(C-D)">(A+B)/(C-D)</button>
+                <button class="chip" data-expr="A*B+C*D">A*B+C*D</button>
+              </div>
+            </div>
+
+            <!-- Action Button Area -->
+            <div class="action-area">
+              <button id="generate-btn" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Generate</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Output Tabs Section -->
+        <section class="card tabs-card">
+          <!-- Tab Navigation Headers -->
+          <div class="tabs-header-wrapper">
+            <div class="tabs-nav" role="tablist" aria-label="Instruction Format Tabs">
+              <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-3address" id="tab-3address" data-tab="3address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="9" y1="9" x2="15" y2="9"></line>
+                  <line x1="9" y1="13" x2="15" y2="13"></line>
+                  <line x1="9" y1="17" x2="13" y2="17"></line>
+                </svg>
+                <span>3 Address</span>
+              </button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-2address" id="tab-2address" data-tab="2address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span>2 Address</span>
+              </button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-1address" id="tab-1address" data-tab="1address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                </svg>
+                <span>1 Address</span>
+              </button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-0address" id="tab-0address" data-tab="0address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                <span>0 Address</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Empty Tab Content Panels -->
+          <div class="tabs-body">
+
+            <!-- 3 Address Tab Panel -->
+            <div class="tab-panel active" id="panel-3address" role="tabpanel" aria-labelledby="tab-3address">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="9" y1="9" x2="15" y2="9"></line>
+                    <line x1="9" y1="13" x2="15" y2="13"></line>
+                  </svg>
+                </div>
+                <h3>Three-Address Instructions</h3>
+                <p>Three-address instructions (e.g. <code>ADD T1, A, B</code>) will be displayed here.</p>
+                <div class="format-badge">Format: <code>OPCODE DEST, SRC1, SRC2</code></div>
+              </div>
+            </div>
+
+
+            <!-- 2 Address Tab Panel -->
+            <div class="tab-panel" id="panel-2address" role="tabpanel" aria-labelledby="tab-2address">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </div>
+                <h3>Two-Address Instructions</h3>
+                <p>Two-address assembly code (e.g. <code>MOV R1, A</code>, <code>ADD R1, B</code>) will be listed here.</p>
+                <div class="format-badge">Format: <code>OP DEST, SRC</code></div>
+              </div>
+            </div>
+
+            <!-- 1 Address Tab Panel -->
+            <div class="tab-panel" id="panel-1address" role="tabpanel" aria-labelledby="tab-1address">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                  </svg>
+                </div>
+                <h3>One-Address (Accumulator) Instructions</h3>
+                <p>Accumulator-based instructions (e.g. <code>LOAD A</code>, <code>ADD B</code>) will be listed here.</p>
+                <div class="format-badge">Format: <code>OP OPERAND</code> (Implicit AC)</div>
+              </div>
+            </div>
+
+            <!-- 0 Address Tab Panel -->
+            <div class="tab-panel" id="panel-0address" role="tabpanel" aria-labelledby="tab-0address">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                </div>
+                <h3>Zero-Address (Stack Machine) Instructions</h3>
+                <p>Stack machine operations (e.g. <code>PUSH A</code>, <code>PUSH B</code>, <code>ADD</code>) will be listed here.</p>
+                <div class="format-badge">Format: <code>PUSH/POP OPERAND</code> or <code>OP</code> (Implicit Stack)</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="container footer-content">
+        <p>Instruction Set Simulator UI • Computer Organization & Architecture</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- App Scripts -->
+  <script src="parser.js"></script>
+  <script src="simulator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
